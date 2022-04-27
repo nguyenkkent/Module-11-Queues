@@ -1,14 +1,27 @@
 import java.util.*;
 
+
 public class HomeworkM11Driver {
 
 	// note: don't worry about generics here; i've omitted them and 
 	// suppressed the warnings so you can focus on the queue logic
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static void splice(QueueInterface firstQueue, QueueInterface secondQueue) {
-     	// YOUR CODE HERE
+		QueueInterface tempQueue = new ArrayQueue();
+		
+		//dequeue all items from Q2 into Q1 and a temp Q holder
+		while (!secondQueue.isEmpty()) {
+			Object obj = secondQueue.dequeue();
+			firstQueue.enqueue(obj);
+			tempQueue.enqueue(obj);
+		}
+		
+		//enqueue all items back into Q2
+		while(!tempQueue.isEmpty()) {
+			secondQueue.enqueue(tempQueue.dequeue());
+		}					
 	}
-	
+
 	private static boolean allTestsPassed = true; 
 	
 	public static void main(String[] args) {

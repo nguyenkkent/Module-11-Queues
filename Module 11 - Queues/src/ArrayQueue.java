@@ -98,12 +98,18 @@ public class ArrayQueue<T> implements QueueInterface<T> {
 	}
    
    	public void splice(ArrayQueue<T> anotherQueue) {
-   		// YOUR CODE HERE!
+   		int size= anotherQueue.queue.length; //length of anotherQueue 
+   		
+   		for (int i = anotherQueue.frontIndex; i != (anotherQueue.backIndex +1) % size; i= (i+1) % size) {
+   			enqueue(anotherQueue.queue[i]);
+   		}
    	} 
    	
    	public T getSecond() {
-		// YOUR EXTRA CREDIT CODE HERE!
-   		return null; // placeholder: replace with your own code
+		if (isEmpty() || frontIndex == backIndex)
+			throw new EmptyQueueException();
+		else 
+			return queue[(frontIndex +1) % (queue.length)];
 	}
 	
 	
